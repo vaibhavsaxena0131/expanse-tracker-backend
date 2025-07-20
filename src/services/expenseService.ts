@@ -23,7 +23,9 @@ export const deleteExpense = async (id: string) => {
   return prisma.expense.delete({ where: { id } });
 };
 
-export const approveExpense = async (id: string, status: string) => {
+import type { ExpenseStatus } from '@prisma/client';
+
+export const approveExpense = async (id: string, status: ExpenseStatus) => {
   return prisma.expense.update({ where: { id }, data: { status } });
 };
 

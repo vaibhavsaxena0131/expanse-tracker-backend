@@ -1,16 +1,15 @@
-import jwt from 'jsonwebtoken';
+import jwt, { Secret, SignOptions } from 'jsonwebtoken';
 
 interface TokenPayload {
   id: string;
-  role?: string; // optional, because refresh token doesn’t need it
+  role?: string;
 }
 
-/**
- * Generate JWT token
- * @param payload payload to include in the token
- * @param secret env secret
- * @param expiresIn time like '15m' or '7d'
- */
-export const generateToken = (payload: TokenPayload, secret: string, expiresIn: string): string => {
-  return jwt.sign(payload, secret, { expiresIn });
+export const generateToken = (
+  payload: TokenPayload,
+  secret: string | Secret, // <-- Accept both string and Secret
+  expiresIn: SignOptions['expiresIn']
+): string => {
+  const options: SignOptions = { expiresIn };
+  return jwt.sign(payload, secret, options);
 };
