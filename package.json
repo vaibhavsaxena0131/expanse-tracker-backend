@@ -19,6 +19,9 @@
   "engines": {
     "node": "20.x"
   },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
+  },
   "dependencies": {
     "@prisma/client": "^6.12.0",
     "bcrypt": "^6.0.0",
