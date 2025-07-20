@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import prisma from '../config/prisma';
+import prisma from '../config/prisma.js';
 import bcrypt from 'bcrypt';
-import { generateToken } from '../utils/token';
+import { generateToken } from '../utils/token.js';
 
 
 export const authenticateUser = async (email: string, password: string) => {

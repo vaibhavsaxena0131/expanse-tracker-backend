@@ -6,11 +6,11 @@ import {
   deleteExpense,
   approveExpense,
   getAnalytics
-} from '../controllers/expenseController';
-import { authenticate } from '../midddleware/authMiddleware';
-import { authorize } from '../midddleware/roleMiddleware';
-import { validateBody } from '../utils/validate';
-import { createExpenseSchema } from '../validators/expenseValidators';
+} from '../controllers/expenseController.js';
+import { authenticate } from '../midddleware/authMiddleware.js';
+import { authorize } from '../midddleware/roleMiddleware.js';
+import { validateBody } from '../utils/validate.js';
+import { createExpenseSchema } from '../validators/expenseValidators.js';
 
 const router = express.Router();
 
