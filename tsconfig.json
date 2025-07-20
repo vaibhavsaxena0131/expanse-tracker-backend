@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
     "target": "ES2020",
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "rootDir": "src",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": "./src",
     "paths": {
       "@routes/*": ["routes/*"],
       "@middleware/*": ["middleware/*"]
-    }
+    },
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

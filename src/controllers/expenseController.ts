@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as expenseService from '../services/expenseService';
+import * as expenseService from '../services/expenseService.js';
 
 export const createExpense = async (req: Request, res: Response) => {
   const { amount, category, description, date } = req.body;

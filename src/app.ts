@@ -2,10 +2,10 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes';
+import authRoutes from './routes/authRoutes.js';
 import helmet from 'helmet';
-import expenseRoutes from './routes/expenseRoutes';
-import { errorHandler } from './midddleware/errorMiddleware';
+import expenseRoutes from './routes/expenseRoutes.js';
+import { errorHandler } from './midddleware/errorMiddleware.js';
 
 dotenv.config();
 
