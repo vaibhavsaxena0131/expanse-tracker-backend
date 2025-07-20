@@ -10,7 +10,7 @@
     "prisma:migrate": "prisma migrate dev --name init",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
-    "seed": "ts-node src/prisma/seed.ts",
+    "seed": "ts-node src/prisma/seed.js",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts",
     "postinstall": "prisma generate"
