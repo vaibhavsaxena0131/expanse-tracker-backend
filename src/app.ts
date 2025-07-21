@@ -10,7 +10,7 @@ import { authenticate } from './midddleware/authMiddleware.js';
 
 dotenv.config();
 
-const allowedOrigins = process.env.CORS_ORIGINS?.split(',') || [];
+const allowedOrigins = process.env.CORS_ORIGIN
 
 const app = express();
 app.use(cookieParser());
