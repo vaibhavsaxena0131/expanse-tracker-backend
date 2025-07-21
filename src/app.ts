@@ -9,17 +9,22 @@ import { errorHandler } from './midddleware/errorMiddleware.js';
 
 dotenv.config();
 
+const allowedOrigins = [
+  'https://expanse-tracker-frontend-git-main-vaibhavs-projects-8838a755.vercel.app'
+];
+
 const app = express();
 app.use(cookieParser());
 app.use(helmet());
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: allowedOrigins,
     credentials: true
 }));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
+//     next();
+// });
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
