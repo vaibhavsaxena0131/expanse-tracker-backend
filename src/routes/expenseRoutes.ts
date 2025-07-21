@@ -5,61 +5,53 @@ import {
   editExpense,
   deleteExpense,
   getAllExpenses,
-  changeExpenseStatus,
-  getAnalytics
+  changeExpenseStatus
 } from '../controllers/expenseController.js';
-import { authenticate } from '../midddleware/authMiddleware.js';
 import { authorize } from '../midddleware/roleMiddleware.js';
 import { validateBody } from '../utils/validate.js';
-import { createExpenseSchema } from '../validators/expenseValidators.js';
+import {
+  createExpenseSchema,
+  editExpenseSchema,
+  changeStatusSchema
+} from '../validators/expenseValidators.js';
 
 const router = express.Router();
 
 router.post(
   '/',
-  authenticate,
   validateBody(createExpenseSchema),
   createExpense
 );
 
 router.get(
   '/',
-  authenticate,
   getExpenses
 );
 
-// Edit expense only if status is PENDING
 router.put(
   '/:id',
-  authenticate,
+  validateBody(editExpenseSchema),
   editExpense
 );
 
 router.delete(
   '/:id',
-  authenticate,
   deleteExpense
 );
 
+// Admin: get all expenses
 router.get(
   '/all',
-  authenticate,
   authorize(['ADMIN']),
   getAllExpenses
 );
 
+// Admin: change expense status (approve/reject)
 router.post(
   '/:id/status',
-  authenticate,
   authorize(['ADMIN']),
+  validateBody(changeStatusSchema),
   changeExpenseStatus
-);
-
-router.get(
-  '/analytics',
-  authenticate,
-  authorize(['ADMIN']),
-  getAnalytics
 );
 
 export default router;

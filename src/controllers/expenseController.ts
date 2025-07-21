@@ -70,8 +70,3 @@ export const changeExpenseStatus = async (req: Request, res: Response) => {
     res.status(400).json({ message: err.message });
   }
 };
-
-export const getAnalytics = async (req: Request, res: Response) => {
-  const analytics = await expenseService.getAnalytics();
-  res.json(analytics);
-};

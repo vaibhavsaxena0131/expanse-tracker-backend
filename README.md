@@ -1,103 +1,105 @@
 # 🧾 Expense Tracker Backend
 
-A simple expense tracking backend built with **Node.js + Express + TypeScript + Prisma + PostgreSQL**.  
-Designed with professional folder structure, authentication, role-based access, and seed data.
+A robust expense tracking backend built with **Node.js**, **Express**, **TypeScript**, **Prisma**, and **PostgreSQL**.  
+Supports authentication, role-based access, expense management, and analytics for both employees and admins.
 
 ---
 
-## ✅ Features
-- JWT authentication (mock login)
-- Role-based access (Admin, Employee)
-- REST APIs:
-  - Login
-  - Submit expense
-  - View expenses (filter by user, date, category)
-  - Approve/reject expenses (Admin)
-  - Get analytics by category
-- Input validation & error handling
-- Seed script for demo users & expenses
-- PostgreSQL + Prisma ORM
+## 🚀 Features
+
+- **JWT Authentication:** Secure login and protected routes
+- **Role-Based Access:** Admin and Employee roles
+- **Expense Management:** Submit, edit, delete, approve, and reject expenses
+- **Filtering & Analytics:** Filter by category/date/user, analytics by category
+- **Validation & Error Handling:** Input validation with Zod/Joi, centralized error middleware
+- **Seed Data:** Demo users and expenses for quick start
+- **Professional Structure:** Modular controllers, services, routes, and middleware
 
 ---
 
 ## 📦 Project Structure
 
 ```
-
 prisma/              → Prisma schema & seed script
 src/
-├── controllers/    → Route handlers
-├── services/       → Business logic
-├── routes/         → Express routers
-├── middleware/     → Auth & role middlewares
-├── utils/          → Helpers (validation etc.)
-├── app.ts          → Express app
-└── server.ts       → Start server
-
-````
+├── controllers/     → Route handlers (business logic)
+├── services/        → Service layer (DB logic)
+├── routes/          → Express routers
+├── middleware/      → Auth & role middlewares
+├── utils/           → Helpers (validation, JWT, etc.)
+├── app.ts           → Express app setup
+└── server.ts        → Server entry point
+```
 
 ---
 
 ## ⚙️ Setup & Run
 
-1️⃣ Install dependencies:
-```bash
-npm install
-````
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-2️⃣ Apply migrations & generate Prisma client:
+2. **Apply migrations & generate Prisma client**
+   ```bash
+   npx prisma migrate dev --name init
+   ```
 
-```bash
-npx prisma migrate dev --name init
-```
+3. **Seed database with demo data**
+   ```bash
+   npm run seed
+   ```
 
-3️⃣ Seed database with test data:
-
-```bash
-npm run seed
-```
-
-4️⃣ Run in development:
-
-```bash
-npm run dev
-```
+4. **Run in development**
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## 🚀 Test users
+## 👤 Demo Users
 
-|     Role |                                   Email | Password |
-| -------: | --------------------------------------: | -------: |
-|    Admin | [admin@test.com](mailto:admin@test.com) | password |
-| Employee |   [user@test.com](mailto:user@test.com) | password |
+|   Role   |             Name         |           Email              |        Password         |
+|:--------:|:-----------------------:|:----------------------------:|:----------------------:|
+|  Admin   | Priya Sharma            | admin@company.com            | adminStrongPass123      |
+| Employee | John Doe                | john.doe@company.com         | empOnePass456           |
+| Employee | Anita Singh              | anita.singh@company.com      | empTwoPass789           |
 
 ---
 
 ## 🧪 API Endpoints
 
-| Method |                   Endpoint |                    Description |
-| -----: | -------------------------: | -----------------------------: |
-|   POST |            /api/auth/login |             Login, returns JWT |
-|   POST |              /api/expenses |      Submit expense (employee) |
-|    GET |              /api/expenses |      View expenses (own/admin) |
-|   POST | /api/expenses/\:id/approve | Approve/reject expense (admin) |
-|    GET |    /api/expenses/analytics |   Expenses by category (admin) |
+| Method | Endpoint                          | Description                          | Access    |
+|--------|-----------------------------------|--------------------------------------|-----------|
+| POST   | /api/auth/login                   | Login, returns JWT                   | Public    |
+| POST   | /api/expenses                     | Submit expense                       | Employee  |
+| GET    | /api/expenses                     | View own expenses                    | Employee  |
+| PUT    | /api/expenses/:id                 | Edit expense (if pending)            | Employee  |
+| DELETE | /api/expenses/:id                 | Delete expense (if pending)          | Employee  |
+| GET    | /api/expenses/all                 | View all expenses                    | Admin     |
+| POST   | /api/expenses/:id/status          | Approve/Reject expense               | Admin     |
 
 ---
 
-## 🛡 .env.example
+## 🛡 Environment Variables (.env example)
 
 ```
-DATABASE_URL=""
-JWT_SECRET=""
+DATABASE_URL="postgres://user:password@localhost:5432/expensetracker"
+JWT_ACCESS_SECRET="your_access_secret"
+JWT_REFRESH_SECRET="your_refresh_secret"
 PORT=5000
 ```
 
 ---
 
-## ✏ Author
+## 📝 Notes
+
+- **CORS:** Update allowed origins in `src/app.ts` for your frontend domains.
+- **Passwords:** Demo passwords are for development only.
+- **Seed Data:** See `src/prisma/seed.ts` for user and expense examples.
+
+---
+
+## ✏️ Author
 
 Built with ❤️ by Vaibhav
-
-```

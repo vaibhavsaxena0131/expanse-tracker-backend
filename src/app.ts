@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoutes.js';
 import helmet from 'helmet';
 import expenseRoutes from './routes/expenseRoutes.js';
 import { errorHandler } from './midddleware/errorMiddleware.js';
+import { authenticate } from './midddleware/authMiddleware.js';
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
+app.use('/api/auth',authenticate, authRoutes);
 app.use('/api/expenses', expenseRoutes);
 
 app.use(errorHandler);
