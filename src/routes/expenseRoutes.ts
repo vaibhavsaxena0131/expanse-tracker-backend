@@ -4,7 +4,8 @@ import {
   getExpenses,
   editExpense,
   deleteExpense,
-  approveExpense,
+  getAllExpenses,
+  changeExpenseStatus,
   getAnalytics
 } from '../controllers/expenseController.js';
 import { authenticate } from '../midddleware/authMiddleware.js';
@@ -40,11 +41,18 @@ router.delete(
   deleteExpense
 );
 
-router.post(
-  '/:id/approve',
+router.get(
+  '/all',
   authenticate,
   authorize(['ADMIN']),
-  approveExpense
+  getAllExpenses
+);
+
+router.post(
+  '/:id/status',
+  authenticate,
+  authorize(['ADMIN']),
+  changeExpenseStatus
 );
 
 router.get(

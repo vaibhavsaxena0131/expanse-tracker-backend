@@ -51,11 +51,24 @@ export const deleteExpense = async (req: Request, res: Response) => {
   }
 };
 
-export const approveExpense = async (req: Request, res: Response) => {
+export const getAllExpenses = async (req: Request, res: Response) => {
+  const user = (req as any).user;
+  if (user.role !== 'ADMIN') {
+    return res.status(403).json({ message: 'Forbidden: Admins only' });
+  }
+  const expenses = await expenseService.getAllExpenses();
+  res.json(expenses);
+};
+
+export const changeExpenseStatus = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { status } = req.body;
-  const expense = await expenseService.approveExpense(id, status);
-  res.json(expense);
+  try {
+    const expense = await expenseService.changeExpenseStatus(id, status);
+    res.json(expense);
+  } catch (err: any) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
 export const getAnalytics = async (req: Request, res: Response) => {

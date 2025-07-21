@@ -1,3 +1,4 @@
+import { ExpenseStatus } from '@prisma/client';
 import prisma from '../config/prisma.js';
 
 export const createExpense = async (data: any) => {
@@ -23,9 +24,28 @@ export const deleteExpense = async (id: string) => {
   return prisma.expense.delete({ where: { id } });
 };
 
-import type { ExpenseStatus } from '@prisma/client';
+export const getAllExpenses = async () => {
+  const expenses = await prisma.expense.findMany({
+    include: {
+      user: { select: { name: true } }
+    }
+  });
 
-export const approveExpense = async (id: string, status: ExpenseStatus) => {
+  return expenses.map(exp => ({
+    id: exp.id,
+    amount: exp.amount,
+    category: exp.category,
+    description: exp.description,
+    date: exp.date,
+    status: exp.status,
+    submittedBy: exp.user?.name || 'Unknown'
+  }));
+};
+
+export const changeExpenseStatus = async (id: string, status: ExpenseStatus) => {
+  if (!['APPROVED', 'REJECTED'].includes(status)) {
+    throw new Error('Invalid status');
+  }
   return prisma.expense.update({ where: { id }, data: { status } });
 };
 
