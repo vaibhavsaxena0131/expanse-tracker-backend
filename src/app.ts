@@ -16,6 +16,10 @@ app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
 }));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
+    next();
+});
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
