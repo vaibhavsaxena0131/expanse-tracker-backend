@@ -84,9 +84,9 @@ src/
 ## 🛡 Environment Variables (.env example)
 
 ```
-DATABASE_URL="postgres://user:password@localhost:5432/expensetracker"
-JWT_ACCESS_SECRET="your_access_secret"
-JWT_REFRESH_SECRET="your_refresh_secret"
+DATABASE_URL=""
+JWT_ACCESS_SECRET=""
+JWT_REFRESH_SECRET=""
 PORT=5000
 ```
 

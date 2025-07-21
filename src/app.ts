@@ -10,10 +10,7 @@ import { authenticate } from './midddleware/authMiddleware.js';
 
 dotenv.config();
 
-const allowedOrigins = [
-  'https://expanse-tracker-frontend-git-main-vaibhavs-projects-8838a755.vercel.app',
-  'https://expanse-tracker-frontend-vaibhavs-projects-8838a755.vercel.app'
-];
+const allowedOrigins = process.env.CORS_ORIGINS?.split(',') || [];
 
 const app = express();
 app.use(cookieParser());
@@ -25,8 +22,8 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use('/api/auth',authenticate, authRoutes);
-app.use('/api/expenses', expenseRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/expenses',authenticate, expenseRoutes);
 
 app.use(errorHandler);
 
